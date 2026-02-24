@@ -2,6 +2,10 @@
 
 Данный проект представляет собой консольное приложение на C#, предназначенное для преобразования геодезических координат между различными системами (датумами) и проекциями. В основе лежат алгоритмы, соответствующие стандартам (в частности, ГОСТ 32453-2017).
 
+## Ссылка на репозиторий где лежит оконное приложение для тестирования
+**https://github.com/Voevodkin-Daniil/WinGPSAnaliz**
+
+
 ## Источники
 - https://racurs.ru/downloads/documentation/gost_r_32453-2017.pdf?ysclid=m74cniwn8633815025
 - https://earth.google.com/web/search/%d1%81%d0%b0%d0%bc%d0%b0%d1%80%d0%b0/@53.20114544,50.11298133,0a,416.59567164d,35y,-179.64702411h,62.33006212t,0r/data=CiwiJgokCWGLW2mU2E1AEdtcCUfnwBdAGXbs9e2UHmVAIQk49Zd5LF7AQgIIAjoDCgEwQgIIAEoICIjdks8CEAA?hl=ru&authuser=0
