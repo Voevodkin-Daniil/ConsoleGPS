@@ -1,17 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\MyDirrectory\\\u0420\u0430\u0431\u043E\u0442\u0430\\\u041F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 WGS84\\ConsoleGPS\\",
+  "WorkspaceRootPath": "C:\\MyDirrectory\\\u0420\u0430\u0431\u043E\u0442\u0430\\\u041F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 WGS84\\\u041A\u043E\u043D\u0441\u043E\u043B\u044C\u043D\u0430\u044F \u0447\u0430\u0441\u0442\u044C\\ConsoleGPS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B523E2A3-5F37-45D5-8787-5D6BD365F6CF}|ConsoleGPS\\ConsoleGPS.csproj|c:\\mydirrectory\\\u0440\u0430\u0431\u043E\u0442\u0430\\\u043F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 wgs84\\consolegps\\consolegps\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B523E2A3-5F37-45D5-8787-5D6BD365F6CF}|ConsoleGPS\\ConsoleGPS.csproj|c:\\mydirrectory\\\u0440\u0430\u0431\u043E\u0442\u0430\\\u043F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 wgs84\\\u043A\u043E\u043D\u0441\u043E\u043B\u044C\u043D\u0430\u044F \u0447\u0430\u0441\u0442\u044C\\consolegps\\consolegps\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B523E2A3-5F37-45D5-8787-5D6BD365F6CF}|ConsoleGPS\\ConsoleGPS.csproj|solutionrelative:consolegps\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B523E2A3-5F37-45D5-8787-5D6BD365F6CF}|ConsoleGPS\\ConsoleGPS.csproj|c:\\mydirrectory\\\u0440\u0430\u0431\u043E\u0442\u0430\\\u043F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 wgs84\\consolegps\\consolegps\\translationwgs84.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B523E2A3-5F37-45D5-8787-5D6BD365F6CF}|ConsoleGPS\\ConsoleGPS.csproj|c:\\mydirrectory\\\u0440\u0430\u0431\u043E\u0442\u0430\\\u043F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 wgs84\\\u043A\u043E\u043D\u0441\u043E\u043B\u044C\u043D\u0430\u044F \u0447\u0430\u0441\u0442\u044C\\consolegps\\consolegps\\translationwgs84.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B523E2A3-5F37-45D5-8787-5D6BD365F6CF}|ConsoleGPS\\ConsoleGPS.csproj|solutionrelative:consolegps\\translationwgs84.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B523E2A3-5F37-45D5-8787-5D6BD365F6CF}|ConsoleGPS\\ConsoleGPS.csproj|c:\\mydirrectory\\\u0440\u0430\u0431\u043E\u0442\u0430\\\u043F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 wgs84\\consolegps\\consolegps\\parsergms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B523E2A3-5F37-45D5-8787-5D6BD365F6CF}|ConsoleGPS\\ConsoleGPS.csproj|c:\\mydirrectory\\\u0440\u0430\u0431\u043E\u0442\u0430\\\u043F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 wgs84\\\u043A\u043E\u043D\u0441\u043E\u043B\u044C\u043D\u0430\u044F \u0447\u0430\u0441\u0442\u044C\\consolegps\\consolegps\\parsergms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B523E2A3-5F37-45D5-8787-5D6BD365F6CF}|ConsoleGPS\\ConsoleGPS.csproj|solutionrelative:consolegps\\parsergms.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -28,37 +28,35 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "ParserGMS.cs",
-              "DocumentMoniker": "C:\\MyDirrectory\\\u0420\u0430\u0431\u043E\u0442\u0430\\\u041F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 WGS84\\ConsoleGPS\\ConsoleGPS\\ParserGMS.cs",
+              "DocumentMoniker": "C:\\MyDirrectory\\\u0420\u0430\u0431\u043E\u0442\u0430\\\u041F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 WGS84\\\u041A\u043E\u043D\u0441\u043E\u043B\u044C\u043D\u0430\u044F \u0447\u0430\u0441\u0442\u044C\\ConsoleGPS\\ConsoleGPS\\ParserGMS.cs",
               "RelativeDocumentMoniker": "ConsoleGPS\\ParserGMS.cs",
-              "ToolTip": "C:\\MyDirrectory\\\u0420\u0430\u0431\u043E\u0442\u0430\\\u041F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 WGS84\\ConsoleGPS\\ConsoleGPS\\ParserGMS.cs",
+              "ToolTip": "C:\\MyDirrectory\\\u0420\u0430\u0431\u043E\u0442\u0430\\\u041F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 WGS84\\\u041A\u043E\u043D\u0441\u043E\u043B\u044C\u043D\u0430\u044F \u0447\u0430\u0441\u0442\u044C\\ConsoleGPS\\ConsoleGPS\\ParserGMS.cs",
               "RelativeToolTip": "ConsoleGPS\\ParserGMS.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAQwBEAAABLAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T07:51:15.71Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-24T07:51:15.71Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "TranslationWGS84.cs",
-              "DocumentMoniker": "C:\\MyDirrectory\\\u0420\u0430\u0431\u043E\u0442\u0430\\\u041F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 WGS84\\ConsoleGPS\\ConsoleGPS\\TranslationWGS84.cs",
+              "DocumentMoniker": "C:\\MyDirrectory\\\u0420\u0430\u0431\u043E\u0442\u0430\\\u041F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 WGS84\\\u041A\u043E\u043D\u0441\u043E\u043B\u044C\u043D\u0430\u044F \u0447\u0430\u0441\u0442\u044C\\ConsoleGPS\\ConsoleGPS\\TranslationWGS84.cs",
               "RelativeDocumentMoniker": "ConsoleGPS\\TranslationWGS84.cs",
-              "ToolTip": "C:\\MyDirrectory\\\u0420\u0430\u0431\u043E\u0442\u0430\\\u041F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 WGS84\\ConsoleGPS\\ConsoleGPS\\TranslationWGS84.cs",
+              "ToolTip": "C:\\MyDirrectory\\\u0420\u0430\u0431\u043E\u0442\u0430\\\u041F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 WGS84\\\u041A\u043E\u043D\u0441\u043E\u043B\u044C\u043D\u0430\u044F \u0447\u0430\u0441\u0442\u044C\\ConsoleGPS\\ConsoleGPS\\TranslationWGS84.cs",
               "RelativeToolTip": "ConsoleGPS\\TranslationWGS84.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAOwAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-23T18:14:32.234Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-23T18:14:32.234Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\MyDirrectory\\\u0420\u0430\u0431\u043E\u0442\u0430\\\u041F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 WGS84\\ConsoleGPS\\ConsoleGPS\\Program.cs",
+              "DocumentMoniker": "C:\\MyDirrectory\\\u0420\u0430\u0431\u043E\u0442\u0430\\\u041F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 WGS84\\\u041A\u043E\u043D\u0441\u043E\u043B\u044C\u043D\u0430\u044F \u0447\u0430\u0441\u0442\u044C\\ConsoleGPS\\ConsoleGPS\\Program.cs",
               "RelativeDocumentMoniker": "ConsoleGPS\\Program.cs",
-              "ToolTip": "C:\\MyDirrectory\\\u0420\u0430\u0431\u043E\u0442\u0430\\\u041F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 WGS84\\ConsoleGPS\\ConsoleGPS\\Program.cs",
+              "ToolTip": "C:\\MyDirrectory\\\u0420\u0430\u0431\u043E\u0442\u0430\\\u041F\u0430\u043F\u043A\u0430 \u0441 \u0441\u0432\u044F\u0437\u0430\u043D\u044B\u043C \u0441 \u043F\u0435\u0440\u0435\u0432\u043E\u0434\u043E\u043C \u0438\u0437 WGS84\\\u041A\u043E\u043D\u0441\u043E\u043B\u044C\u043D\u0430\u044F \u0447\u0430\u0441\u0442\u044C\\ConsoleGPS\\ConsoleGPS\\Program.cs",
               "RelativeToolTip": "ConsoleGPS\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-23T18:06:00.005Z",
               "EditorCaption": ""
