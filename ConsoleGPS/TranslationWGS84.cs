@@ -257,7 +257,7 @@ namespace ConsoleGPS
             double sinB6 = sinB4 * sinB2;
             double l2 = l * l;
 
-            // Вычисление x по формуле (24) – более читаемая форма
+            // Вычисление x по формуле (24)
             double term1 = 16002.8900 + 66.9607 * sinB2 + 0.3515 * sinB4;
             double term2 = 1594561.25 + 5336.535 * sinB2 + 26.790 * sinB4 + 0.149 * sinB6;
             double term3 = 672483.4 - 811219.9 * sinB2 + 5420.0 * sinB4 - 10.6 * sinB6;
