@@ -41,7 +41,7 @@ namespace ConsoleGPS
         /// <param name="datum">Геодезический датум</param>
         /// <param name="altitude">Высота над эллипсоидом в метрах (по умолчанию 0)</param>
         /// <returns>Массив [X, Y, Z] в метрах</returns>
-        public static double[] ConvertGeodeticToCartesian(double latitude, double longitude, EncodingDatum datum, double altitude = 0)
+        public static (double X, double Y, double Z) ConvertGeodeticToCartesian(double latitude, double longitude, EncodingDatum datum, double altitude = 0)
         {
             var (a, f) = GetEllipsoidParams(datum);
             double e2 = 2 * f - f * f; // квадрат первого эксцентриситета
@@ -52,7 +52,7 @@ namespace ConsoleGPS
             double y = (N + altitude) * Math.Cos(latitude) * Math.Sin(longitude);
             double z = ((1 - e2) * N + altitude) * sinLat;
 
-            return new double[] { x, y, z };
+            return (x, y, z );
         }
 
         /// <summary>
@@ -62,12 +62,9 @@ namespace ConsoleGPS
         /// <param name="datum">Геодезический датум</param>
         /// <returns>Массив [X, Y, Z] в метрах</returns>
         /// <exception cref="ArgumentException">Выбрасывается, если массив содержит менее 2 элементов</exception>
-        public static double[] ConvertGeodeticToCartesian(double[] coordinates, EncodingDatum datum)
+        public static (double X, double Y, double Z) ConvertGeodeticToCartesian((double B, double L) var, EncodingDatum datum, double altitude = 0)
         {
-            if (coordinates.Length < 2)
-                throw new ArgumentException("Массив должен содержать широту и долготу");
-            double h = coordinates.Length > 2 ? coordinates[2] : 0;
-            return ConvertGeodeticToCartesian(coordinates[0], coordinates[1], datum, h);
+            return ConvertGeodeticToCartesian(var.B, var.L, datum, altitude);
         }
 
         /// <summary>
@@ -78,7 +75,7 @@ namespace ConsoleGPS
         /// <param name="z">Координата Z в метрах</param>
         /// <param name="datum">Геодезический датум</param>
         /// <returns>Массив [широта (рад), долгота (рад), высота (м)]</returns>
-        public static double[] ConvertCartesianToGeodetic(double x, double y, double z, EncodingDatum datum)
+        public static (double B, double L, double H) ConvertCartesianToGeodetic(double x, double y, double z, EncodingDatum datum)
         {
             var (a, f) = GetEllipsoidParams(datum);
             double e2 = 2 * f - f * f;
@@ -94,7 +91,7 @@ namespace ConsoleGPS
                 double sinLat = Math.Sin(lat2);
                 double N = a / Math.Sqrt(1 - e2 * sinLat * sinLat);
                 double h2 = z * sinLat - N * (1 - e2 * sinLat * sinLat);
-                return new double[] { lat2, lon2, h2 };
+                return (lat2, lon2, h2);
             }
 
             // Долгота
@@ -123,7 +120,7 @@ namespace ConsoleGPS
             double Nfin = a / Math.Sqrt(1 - e2 * sinLatFin * sinLatFin);
             double h = p * Math.Cos(lat) + z * sinLatFin - Nfin * (1 - e2 * sinLatFin * sinLatFin);
 
-            return new double[] { lat, lon, h };
+            return (lat, lon, h);
         }
 
         /// <summary>
@@ -133,11 +130,9 @@ namespace ConsoleGPS
         /// <param name="datum">Геодезический датум</param>
         /// <returns>Массив [широта (рад), долгота (рад), высота (м)]</returns>
         /// <exception cref="ArgumentException">Выбрасывается, если массив содержит менее 3 элементов</exception>
-        public static double[] ConvertCartesianToGeodetic(double[] cartesian, EncodingDatum datum)
+        public static (double B, double L, double H) ConvertCartesianToGeodetic((double X, double Y, double Z) var, EncodingDatum datum)
         {
-            if (cartesian.Length < 3)
-                throw new ArgumentException("Массив должен содержать X, Y, Z");
-            return ConvertCartesianToGeodetic(cartesian[0], cartesian[1], cartesian[2], datum);
+            return ConvertCartesianToGeodetic(var.X, var.Y, var.Z, datum);
         }
         #endregion
 
@@ -147,13 +142,13 @@ namespace ConsoleGPS
         /// </summary>
         /// <param name="pz90">Массив [X, Y, Z] в системе ПЗ-90.11 (метры)</param>
         /// <returns>Массив [X, Y, Z] в системе WGS-84 (метры)</returns>
-        public static double[] ConvertPZ90ToWGS84(double[] pz90)
+        public static (double X, double Y, double Z) ConvertPZ90ToWGS84((double X, double Y, double Z) pz90)
         {
-            double x = pz90[0], y = pz90[1], z = pz90[2];
-            double xW = x + (+2.041066e-8) * y + (+1.716240e-8) * z - (-0.003);
-            double yW = (-2.041066e-8) * x + y + (+1.115071e-8) * z - (-0.001);
-            double zW = (-1.716240e-8) * x + (-1.115071e-8) * y + z - (0.000);
-            return new double[] { xW, yW, zW };
+            return (
+            pz90.X + (+2.041066e-8) * pz90.Y + (+1.716240e-8) * pz90.Z - (-0.003),
+            (-2.041066e-8) * pz90.X + pz90.Y + (+1.115071e-8) * pz90.Z - (-0.001),
+            (-1.716240e-8) * pz90.X + (-1.115071e-8) * pz90.Y + pz90.Z - (0.000)
+            );
         }
 
         /// <summary>
@@ -161,13 +156,13 @@ namespace ConsoleGPS
         /// </summary>
         /// <param name="wgs84">Массив [X, Y, Z] в системе WGS-84 (метры)</param>
         /// <returns>Массив [X, Y, Z] в системе ПЗ-90.11 (метры)</returns>
-        public static double[] ConvertWGS84ToPZ90(double[] wgs84)
+        public static (double X, double Y, double Z) ConvertWGS84ToPZ90((double X, double Y, double Z) wgs84)
         {
-            double x = wgs84[0], y = wgs84[1], z = wgs84[2];
-            double xPz = x + (-2.041066e-8) * y + (-1.716240e-8) * z + (-0.003);
-            double yPz = (+2.041066e-8) * x + y + (-1.115071e-8) * z + (+0.001);
-            double zPz = (+1.716240e-8) * x + (+1.115071e-8) * y + z + (0.000);
-            return new double[] { xPz, yPz, zPz };
+            return (
+            wgs84.X + (-2.041066e-8) * wgs84.Y + (-1.716240e-8) * wgs84.Z + (-0.003),
+            (+2.041066e-8) * wgs84.X + wgs84.Y + (-1.115071e-8) * wgs84.Z + (+0.001),
+            (+1.716240e-8) * wgs84.X + (+1.115071e-8) * wgs84.Y + wgs84.Z + (0.000)
+            );
         }
 
         /// <summary>
@@ -175,13 +170,13 @@ namespace ConsoleGPS
         /// </summary>
         /// <param name="pz90">Массив [X, Y, Z] в системе ПЗ-90.11 (метры)</param>
         /// <returns>Массив [X, Y, Z] в системе ГСК-2011 (метры)</returns>
-        public static double[] ConvertPZ90ToGSK2011(double[] pz90)
+        public static (double X, double Y, double Z) ConvertPZ90ToGSK2011((double X, double Y, double Z) pz90)
         {
-            double x = pz90[0], y = pz90[1], z = pz90[2];
-            double xG = x + (-2.56951e-10) * y + (-9.21146e-11) * z - (0.000);
-            double yG = (+2.569513e-10) * x + y + (-2.72465e-9) * z - (+0.014);
-            double zG = (+9.211460e-11) * x + (-2.72465e-9) * y + z - (-0.008);
-            return new double[] { xG, yG, zG };
+            return (
+            pz90.X + (-2.56951e-10) * pz90.Y + (-9.21146e-11) * pz90.Z - (0.000),
+            (+2.569513e-10) * pz90.X + pz90.Y + (-2.72465e-9) * pz90.Z - (+0.014),
+            (+9.211460e-11) * pz90.X + (-2.72465e-9) * pz90.Y + pz90.Z - (-0.008)
+            );
         }
 
         /// <summary>
@@ -189,13 +184,13 @@ namespace ConsoleGPS
         /// </summary>
         /// <param name="gsk2011">Массив [X, Y, Z] в системе ГСК-2011 (метры)</param>
         /// <returns>Массив [X, Y, Z] в системе ПЗ-90.11 (метры)</returns>
-        public static double[] ConvertGSK2011ToPZ90(double[] gsk2011)
+        public static (double X, double Y, double Z) ConvertGSK2011ToPZ90((double X, double Y, double Z) gsk2011)
         {
-            double x = gsk2011[0], y = gsk2011[1], z = gsk2011[2];
-            double xP = x + (+2.569513e-10) * y + (+9.211460e-11) * z + (0.000);
-            double yP = (-2.569513e-10) * x + y + (+2.724653e-9) * z + (+0.014);
-            double zP = (-9.211460e-11) * x + (-2.724653e-9) * y + z + (-0.008);
-            return new double[] { xP, yP, zP };
+            return (
+            gsk2011.X + (+2.569513e-10) * gsk2011.Y + (+9.211460e-11) * gsk2011.Z + (0.000),
+            (-2.569513e-10) * gsk2011.X + gsk2011.Y + (+2.724653e-9) * gsk2011.Z + (+0.014),
+            (-9.211460e-11) * gsk2011.X + (-2.724653e-9) * gsk2011.Y + gsk2011.Z + (-0.008)
+            );
         }
 
         /// <summary>
@@ -203,13 +198,13 @@ namespace ConsoleGPS
         /// </summary>
         /// <param name="pz90">Массив [X, Y, Z] в системе ПЗ-90.11 (метры)</param>
         /// <returns>Массив [X, Y, Z] в системе СК (метры)</returns>
-        public static double[] ConvertPZ90ToSK(double[] pz90)
+        public static (double X, double Y, double Z) ConvertPZ90ToSK((double X, double Y, double Z) pz90)
         {
-            double x = pz90[0], y = pz90[1], z = pz90[2];
-            double xSk = x + (+6.506684e-7) * y + (+1.716240e-8) * z - (+24.457);
-            double ySk = (-6.506684e-7) * x + y + (+1.115071e-8) * z - (-130.784);
-            double zSk = (-1.716240e-8) * x + (-1.115071e-8) * y + z - (-81.538);
-            return new double[] { xSk, ySk, zSk };
+            return (
+            pz90.X + (+6.506684e-7) * pz90.Y + (+1.716240e-8) * pz90.Z - (+24.457),
+            (-6.506684e-7) * pz90.X + pz90.Y + (+1.115071e-8) * pz90.Z - (-130.784),
+            (-1.716240e-8) * pz90.X + (-1.115071e-8) * pz90.Y + pz90.Z - (-81.538)
+            );
         }
 
         /// <summary>
@@ -217,13 +212,13 @@ namespace ConsoleGPS
         /// </summary>
         /// <param name="sk">Массив [X, Y, Z] в системе СК (метры)</param>
         /// <returns>Массив [X, Y, Z] в системе ПЗ-90.11 (метры)</returns>
-        public static double[] ConvertSKToPZ90(double[] sk)
+        public static (double X, double Y, double Z) ConvertSKToPZ90((double X, double Y, double Z) sk)
         {
-            double x = sk[0], y = sk[1], z = sk[2];
-            double xP = x + (-6.506684e-7) * y + (-1.716240e-8) * z + (+24.457);
-            double yP = (+6.506684e-7) * x + y + (-1.115071e-8) * z + (-130.784);
-            double zP = (+1.716240e-8) * x + (+1.115071e-8) * y + z + (-81.538);
-            return new double[] { xP, yP, zP };
+            return (
+            sk.X + (-6.506684e-7) * sk.Y + (-1.716240e-8) * sk.Z + (+24.457),
+            (+6.506684e-7) * sk.X + sk.Y + (-1.115071e-8) * sk.Z + (-130.784),
+            (+1.716240e-8) * sk.X + (+1.115071e-8) * sk.Y + sk.Z + (-81.538)
+            );
         }
         #endregion
 
@@ -234,15 +229,15 @@ namespace ConsoleGPS
         /// <param name="latitudeWgs84">Геодезическая широта в WGS-84 (радианы)</param>
         /// <param name="longitudeWgs84">Геодезическая долгота в WGS-84 (радианы)</param>
         /// <returns>Массив [x, y] в метрах, где x - северное смещение (ордината), y - восточное смещение с номером зоны</returns>
-        public static double[] ConvertToGaussKrueger(double latitudeWgs84, double longitudeWgs84)
+        public static (double x, double y) ConvertToGaussKrueger(double latitudeWgs84, double longitudeWgs84)
         {
             // Цепочка: WGS84 (геод.) -> декартовы WGS84 -> PZ-90 -> SK -> геод. SK
-            double[] wgsCart = ConvertGeodeticToCartesian(latitudeWgs84, longitudeWgs84, EncodingDatum.WGS_84);
-            double[] pzCart = ConvertWGS84ToPZ90(wgsCart);
-            double[] skCart = ConvertPZ90ToSK(pzCart);
-            double[] skGeo = ConvertCartesianToGeodetic(skCart, EncodingDatum.SK);
-            double B = skGeo[0]; // широта в радианах (эллипсоид Красовского)
-            double L = skGeo[1]; // долгота в радианах
+            var wgsCart = ConvertGeodeticToCartesian(latitudeWgs84, longitudeWgs84, EncodingDatum.WGS_84);
+            var pzCart = ConvertWGS84ToPZ90(wgsCart);
+            var skCart = ConvertPZ90ToSK(pzCart);
+            var skGeo = ConvertCartesianToGeodetic(skCart, EncodingDatum.SK);
+            double B = skGeo.B; // широта в радианах (эллипсоид Красовского)
+            double L = skGeo.L; // долгота в радианах
 
             // Прямая проекция Гаусса-Крюгера (формулы 24-26 ГОСТ)
             double L_deg = L * 180.0 / Math.PI;
@@ -278,7 +273,7 @@ namespace ConsoleGPS
                 + l2 * (270806 - 1523417 * sinB2 + 1327645 * sinB4 - 21701 * sinB6
                 + l2 * (79690 - 866190 * sinB2 + 1730360 * sinB4 - 945460 * sinB6))));
 
-            return new double[] { x, y };
+            return ( x, y );
         }
 
         /// <summary>
@@ -287,7 +282,7 @@ namespace ConsoleGPS
         /// <param name="x">Северное смещение (ордината) в метрах</param>
         /// <param name="y">Восточное смещение с номером зоны в метрах (первые цифры - номер зоны)</param>
         /// <returns>Массив [широта (рад), долгота (рад), высота (м)] в системе WGS-84</returns>
-        public static double[] ConvertFromGaussKrueger(double x, double y)
+        public static (double B, double L, double H) ConvertFromGaussKrueger(double x, double y)
         {
             // Обратная проекция (формулы 29-36 ГОСТ)
             int n = (int)(y * 1e-6);
@@ -330,10 +325,10 @@ namespace ConsoleGPS
             double L_sk = (6 * (n - 0.5)) * Math.PI / 180.0 + l;
 
             // Обратная цепочка: СК (геод.) -> декартовы СК -> PZ-90 -> WGS84 -> геод. WGS84
-            double[] skCart = ConvertGeodeticToCartesian(B_sk, L_sk, EncodingDatum.SK);
-            double[] pzCart = ConvertSKToPZ90(skCart);
-            double[] wgsCart = ConvertPZ90ToWGS84(pzCart);
-            double[] wgsGeo = ConvertCartesianToGeodetic(wgsCart, EncodingDatum.WGS_84);
+            var skCart = ConvertGeodeticToCartesian(B_sk, L_sk, EncodingDatum.SK);
+            var pzCart = ConvertSKToPZ90(skCart);
+            var wgsCart = ConvertPZ90ToWGS84(pzCart);
+            var wgsGeo = ConvertCartesianToGeodetic(wgsCart, EncodingDatum.WGS_84);
 
             return wgsGeo; // [широта (рад), долгота (рад), высота (м)]
         }
