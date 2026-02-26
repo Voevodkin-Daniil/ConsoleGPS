@@ -66,9 +66,9 @@
 
 ```csharp
 // Пример вызова преобразования в проекцию Гаусса-Крюгера
-double B = ParserGMS.ParseToDecimal("53°12'05.41") * Math.PI / 180.0;
-double L = ParserGMS.ParseToDecimal("50°06'48.03") * Math.PI / 180.0;
+double B = 53.325252 * Math.PI / 180.0;
+double L = 50.332141 * Math.PI / 180.0;
 
-double[] gaussKruegerCoords = TranslationWGS84.ConvertToGaussKrueger(B, L);
-Console.WriteLine($"X: {gaussKruegerCoords[0]}, Y: {gaussKruegerCoords[1]}");
+var gaussKruegerCoords = TranslationWGS84.ConvertToGaussKrueger(B, L);
+Console.WriteLine($"X: {gaussKruegerCoords.x}, Y: {gaussKruegerCoords.y}");
 ```
