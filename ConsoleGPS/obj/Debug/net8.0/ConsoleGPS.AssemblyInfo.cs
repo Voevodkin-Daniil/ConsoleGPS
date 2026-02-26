@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ConsoleGPS")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+53b2f681191e46f210d9ab0729bb4682d146267c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5e6af989038113ef4a02cf680339315bf7d9d59a")]
 [assembly: System.Reflection.AssemblyProductAttribute("ConsoleGPS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ConsoleGPS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
