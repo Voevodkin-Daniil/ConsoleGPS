@@ -32,7 +32,7 @@ namespace ConsoleGPS
         }
         #endregion
 
-        #region Преобразование геодезических <-> декартовых координат
+        #region Преобразование геодезических <=> декартовых координат
         /// <summary>
         /// Преобразует геодезические координаты (широта, долгота, высота) в геоцентрические прямоугольные координаты (X, Y, Z)
         /// </summary>
@@ -40,7 +40,7 @@ namespace ConsoleGPS
         /// <param name="longitude">Геодезическая долгота в радианах</param>
         /// <param name="datum">Геодезический датум</param>
         /// <param name="altitude">Высота над эллипсоидом в метрах (по умолчанию 0)</param>
-        /// <returns>Массив [X, Y, Z] в метрах</returns>
+        /// <returns>Кортеж (X, Y, Z) в метрах</returns>
         public static (double X, double Y, double Z) ConvertGeodeticToCartesian(double latitude, double longitude, EncodingDatum datum, double altitude = 0)
         {
             var (a, f) = GetEllipsoidParams(datum);
@@ -52,19 +52,19 @@ namespace ConsoleGPS
             double y = (N + altitude) * Math.Cos(latitude) * Math.Sin(longitude);
             double z = ((1 - e2) * N + altitude) * sinLat;
 
-            return (x, y, z );
+            return (x, y, z);
         }
 
         /// <summary>
         /// Преобразует геодезические координаты (широта, долгота, высота) в геоцентрические прямоугольные координаты (X, Y, Z)
         /// </summary>
-        /// <param name="coordinates">Массив [широта (рад), долгота (рад), высота (м)] (высота опциональна)</param>
+        /// <param name="geodetic">Кортеж (B, L) - широта и долгота в радианах</param>
         /// <param name="datum">Геодезический датум</param>
-        /// <returns>Массив [X, Y, Z] в метрах</returns>
-        /// <exception cref="ArgumentException">Выбрасывается, если массив содержит менее 2 элементов</exception>
-        public static (double X, double Y, double Z) ConvertGeodeticToCartesian((double B, double L) var, EncodingDatum datum, double altitude = 0)
+        /// <param name="altitude">Высота над эллипсоидом в метрах (по умолчанию 0)</param>
+        /// <returns>Кортеж (X, Y, Z) в метрах</returns>
+        public static (double X, double Y, double Z) ConvertGeodeticToCartesian((double B, double L) geodetic, EncodingDatum datum, double altitude = 0)
         {
-            return ConvertGeodeticToCartesian(var.B, var.L, datum, altitude);
+            return ConvertGeodeticToCartesian(geodetic.B, geodetic.L, datum, altitude);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace ConsoleGPS
         /// <param name="y">Координата Y в метрах</param>
         /// <param name="z">Координата Z в метрах</param>
         /// <param name="datum">Геодезический датум</param>
-        /// <returns>Массив [широта (рад), долгота (рад), высота (м)]</returns>
+        /// <returns>Кортеж (B, L, H) - широта (рад), долгота (рад), высота (м)</returns>
         public static (double B, double L, double H) ConvertCartesianToGeodetic(double x, double y, double z, EncodingDatum datum)
         {
             var (a, f) = GetEllipsoidParams(datum);
@@ -126,13 +126,12 @@ namespace ConsoleGPS
         /// <summary>
         /// Преобразует геоцентрические прямоугольные координаты (X, Y, Z) в геодезические координаты (широта, долгота, высота)
         /// </summary>
-        /// <param name="cartesian">Массив [X, Y, Z] в метрах</param>
+        /// <param name="cartesian">Кортеж (X, Y, Z) в метрах</param>
         /// <param name="datum">Геодезический датум</param>
-        /// <returns>Массив [широта (рад), долгота (рад), высота (м)]</returns>
-        /// <exception cref="ArgumentException">Выбрасывается, если массив содержит менее 3 элементов</exception>
-        public static (double B, double L, double H) ConvertCartesianToGeodetic((double X, double Y, double Z) var, EncodingDatum datum)
+        /// <returns>Кортеж (B, L, H) - широта (рад), долгота (рад), высота (м)</returns>
+        public static (double B, double L, double H) ConvertCartesianToGeodetic((double X, double Y, double Z) cartesian, EncodingDatum datum)
         {
-            return ConvertCartesianToGeodetic(var.X, var.Y, var.Z, datum);
+            return ConvertCartesianToGeodetic(cartesian.X, cartesian.Y, cartesian.Z, datum);
         }
         #endregion
 
@@ -140,84 +139,84 @@ namespace ConsoleGPS
         /// <summary>
         /// Преобразует геоцентрические координаты из системы ПЗ-90.11 в WGS-84(G1150)
         /// </summary>
-        /// <param name="pz90">Массив [X, Y, Z] в системе ПЗ-90.11 (метры)</param>
-        /// <returns>Массив [X, Y, Z] в системе WGS-84 (метры)</returns>
+        /// <param name="pz90">Кортеж (X, Y, Z) в системе ПЗ-90.11 (метры)</param>
+        /// <returns>Кортеж (X, Y, Z) в системе WGS-84 (метры)</returns>
         public static (double X, double Y, double Z) ConvertPZ90ToWGS84((double X, double Y, double Z) pz90)
         {
             return (
-            pz90.X + (+2.041066e-8) * pz90.Y + (+1.716240e-8) * pz90.Z - (-0.003),
-            (-2.041066e-8) * pz90.X + pz90.Y + (+1.115071e-8) * pz90.Z - (-0.001),
-            (-1.716240e-8) * pz90.X + (-1.115071e-8) * pz90.Y + pz90.Z - (0.000)
+                pz90.X + (+2.041066e-8) * pz90.Y + (+1.716240e-8) * pz90.Z - (-0.003),
+                (-2.041066e-8) * pz90.X + pz90.Y + (+1.115071e-8) * pz90.Z - (-0.001),
+                (-1.716240e-8) * pz90.X + (-1.115071e-8) * pz90.Y + pz90.Z - (0.000)
             );
         }
 
         /// <summary>
         /// Преобразует геоцентрические координаты из системы WGS-84(G1150) в ПЗ-90.11
         /// </summary>
-        /// <param name="wgs84">Массив [X, Y, Z] в системе WGS-84 (метры)</param>
-        /// <returns>Массив [X, Y, Z] в системе ПЗ-90.11 (метры)</returns>
+        /// <param name="wgs84">Кортеж (X, Y, Z) в системе WGS-84 (метры)</param>
+        /// <returns>Кортеж (X, Y, Z) в системе ПЗ-90.11 (метры)</returns>
         public static (double X, double Y, double Z) ConvertWGS84ToPZ90((double X, double Y, double Z) wgs84)
         {
             return (
-            wgs84.X + (-2.041066e-8) * wgs84.Y + (-1.716240e-8) * wgs84.Z + (-0.003),
-            (+2.041066e-8) * wgs84.X + wgs84.Y + (-1.115071e-8) * wgs84.Z + (+0.001),
-            (+1.716240e-8) * wgs84.X + (+1.115071e-8) * wgs84.Y + wgs84.Z + (0.000)
+                wgs84.X + (-2.041066e-8) * wgs84.Y + (-1.716240e-8) * wgs84.Z + (-0.003),
+                (+2.041066e-8) * wgs84.X + wgs84.Y + (-1.115071e-8) * wgs84.Z + (+0.001),
+                (+1.716240e-8) * wgs84.X + (+1.115071e-8) * wgs84.Y + wgs84.Z + (0.000)
             );
         }
 
         /// <summary>
         /// Преобразует геоцентрические координаты из системы ПЗ-90.11 в ГСК-2011
         /// </summary>
-        /// <param name="pz90">Массив [X, Y, Z] в системе ПЗ-90.11 (метры)</param>
-        /// <returns>Массив [X, Y, Z] в системе ГСК-2011 (метры)</returns>
+        /// <param name="pz90">Кортеж (X, Y, Z) в системе ПЗ-90.11 (метры)</param>
+        /// <returns>Кортеж (X, Y, Z) в системе ГСК-2011 (метры)</returns>
         public static (double X, double Y, double Z) ConvertPZ90ToGSK2011((double X, double Y, double Z) pz90)
         {
             return (
-            pz90.X + (-2.56951e-10) * pz90.Y + (-9.21146e-11) * pz90.Z - (0.000),
-            (+2.569513e-10) * pz90.X + pz90.Y + (-2.72465e-9) * pz90.Z - (+0.014),
-            (+9.211460e-11) * pz90.X + (-2.72465e-9) * pz90.Y + pz90.Z - (-0.008)
+                pz90.X + (-2.56951e-10) * pz90.Y + (-9.21146e-11) * pz90.Z - (0.000),
+                (+2.569513e-10) * pz90.X + pz90.Y + (-2.72465e-9) * pz90.Z - (+0.014),
+                (+9.211460e-11) * pz90.X + (-2.72465e-9) * pz90.Y + pz90.Z - (-0.008)
             );
         }
 
         /// <summary>
         /// Преобразует геоцентрические координаты из системы ГСК-2011 в ПЗ-90.11
         /// </summary>
-        /// <param name="gsk2011">Массив [X, Y, Z] в системе ГСК-2011 (метры)</param>
-        /// <returns>Массив [X, Y, Z] в системе ПЗ-90.11 (метры)</returns>
+        /// <param name="gsk2011">Кортеж (X, Y, Z) в системе ГСК-2011 (метры)</param>
+        /// <returns>Кортеж (X, Y, Z) в системе ПЗ-90.11 (метры)</returns>
         public static (double X, double Y, double Z) ConvertGSK2011ToPZ90((double X, double Y, double Z) gsk2011)
         {
             return (
-            gsk2011.X + (+2.569513e-10) * gsk2011.Y + (+9.211460e-11) * gsk2011.Z + (0.000),
-            (-2.569513e-10) * gsk2011.X + gsk2011.Y + (+2.724653e-9) * gsk2011.Z + (+0.014),
-            (-9.211460e-11) * gsk2011.X + (-2.724653e-9) * gsk2011.Y + gsk2011.Z + (-0.008)
+                gsk2011.X + (+2.569513e-10) * gsk2011.Y + (+9.211460e-11) * gsk2011.Z + (0.000),
+                (-2.569513e-10) * gsk2011.X + gsk2011.Y + (+2.724653e-9) * gsk2011.Z + (+0.014),
+                (-9.211460e-11) * gsk2011.X + (-2.724653e-9) * gsk2011.Y + gsk2011.Z + (-0.008)
             );
         }
 
         /// <summary>
         /// Преобразует геоцентрические координаты из системы ПЗ-90.11 в СК-42/95 (эллипсоид Красовского)
         /// </summary>
-        /// <param name="pz90">Массив [X, Y, Z] в системе ПЗ-90.11 (метры)</param>
-        /// <returns>Массив [X, Y, Z] в системе СК (метры)</returns>
+        /// <param name="pz90">Кортеж (X, Y, Z) в системе ПЗ-90.11 (метры)</param>
+        /// <returns>Кортеж (X, Y, Z) в системе СК (метры)</returns>
         public static (double X, double Y, double Z) ConvertPZ90ToSK((double X, double Y, double Z) pz90)
         {
             return (
-            pz90.X + (+6.506684e-7) * pz90.Y + (+1.716240e-8) * pz90.Z - (+24.457),
-            (-6.506684e-7) * pz90.X + pz90.Y + (+1.115071e-8) * pz90.Z - (-130.784),
-            (-1.716240e-8) * pz90.X + (-1.115071e-8) * pz90.Y + pz90.Z - (-81.538)
+                pz90.X + (+6.506684e-7) * pz90.Y + (+1.716240e-8) * pz90.Z - (+24.457),
+                (-6.506684e-7) * pz90.X + pz90.Y + (+1.115071e-8) * pz90.Z - (-130.784),
+                (-1.716240e-8) * pz90.X + (-1.115071e-8) * pz90.Y + pz90.Z - (-81.538)
             );
         }
 
         /// <summary>
         /// Преобразует геоцентрические координаты из системы СК-42/95 (эллипсоид Красовского) в ПЗ-90.11
         /// </summary>
-        /// <param name="sk">Массив [X, Y, Z] в системе СК (метры)</param>
-        /// <returns>Массив [X, Y, Z] в системе ПЗ-90.11 (метры)</returns>
+        /// <param name="sk">Кортеж (X, Y, Z) в системе СК (метры)</param>
+        /// <returns>Кортеж (X, Y, Z) в системе ПЗ-90.11 (метры)</returns>
         public static (double X, double Y, double Z) ConvertSKToPZ90((double X, double Y, double Z) sk)
         {
             return (
-            sk.X + (-6.506684e-7) * sk.Y + (-1.716240e-8) * sk.Z + (+24.457),
-            (+6.506684e-7) * sk.X + sk.Y + (-1.115071e-8) * sk.Z + (-130.784),
-            (+1.716240e-8) * sk.X + (+1.115071e-8) * sk.Y + sk.Z + (-81.538)
+                sk.X + (-6.506684e-7) * sk.Y + (-1.716240e-8) * sk.Z + (+24.457),
+                (+6.506684e-7) * sk.X + sk.Y + (-1.115071e-8) * sk.Z + (-130.784),
+                (+1.716240e-8) * sk.X + (+1.115071e-8) * sk.Y + sk.Z + (-81.538)
             );
         }
         #endregion
@@ -228,7 +227,7 @@ namespace ConsoleGPS
         /// </summary>
         /// <param name="latitudeWgs84">Геодезическая широта в WGS-84 (радианы)</param>
         /// <param name="longitudeWgs84">Геодезическая долгота в WGS-84 (радианы)</param>
-        /// <returns>Массив [x, y] в метрах, где x - северное смещение (ордината), y - восточное смещение с номером зоны</returns>
+        /// <returns>Кортеж (x, y) в метрах, где x - северное смещение (ордината), y - восточное смещение с номером зоны</returns>
         public static (double x, double y) ConvertToGaussKrueger(double latitudeWgs84, double longitudeWgs84)
         {
             // Цепочка: WGS84 (геод.) -> декартовы WGS84 -> PZ-90 -> SK -> геод. SK
@@ -273,7 +272,7 @@ namespace ConsoleGPS
                 + l2 * (270806 - 1523417 * sinB2 + 1327645 * sinB4 - 21701 * sinB6
                 + l2 * (79690 - 866190 * sinB2 + 1730360 * sinB4 - 945460 * sinB6))));
 
-            return ( x, y );
+            return (x, y);
         }
 
         /// <summary>
@@ -281,7 +280,7 @@ namespace ConsoleGPS
         /// </summary>
         /// <param name="x">Северное смещение (ордината) в метрах</param>
         /// <param name="y">Восточное смещение с номером зоны в метрах (первые цифры - номер зоны)</param>
-        /// <returns>Массив [широта (рад), долгота (рад), высота (м)] в системе WGS-84</returns>
+        /// <returns>Кортеж (B, L, H) - широта (рад), долгота (рад), высота (м) в системе WGS-84</returns>
         public static (double B, double L, double H) ConvertFromGaussKrueger(double x, double y)
         {
             // Обратная проекция (формулы 29-36 ГОСТ)
@@ -330,7 +329,7 @@ namespace ConsoleGPS
             var wgsCart = ConvertPZ90ToWGS84(pzCart);
             var wgsGeo = ConvertCartesianToGeodetic(wgsCart, EncodingDatum.WGS_84);
 
-            return wgsGeo; // [широта (рад), долгота (рад), высота (м)]
+            return wgsGeo; // (B, L, H) - широта (рад), долгота (рад), высота (м)
         }
         #endregion
     }
