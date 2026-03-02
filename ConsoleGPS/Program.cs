@@ -6,6 +6,8 @@ class Program
 {
     static void Main()
     {
+        //Console.WriteLine((int)(-8.0 / 3));
+
         Console.WriteLine("Преобразование координат демонстрационный вариант");
 
         (double B, double L, double H) OO1 = (53.2015043 * Math.PI / 180.0, 50.1133423 * Math.PI / 180.0, 0);
@@ -89,12 +91,12 @@ class Program
         var temp_OO2_1 = TranslationWGS84.ConvertToGaussKrueger(OO2_B, OO2_L);
 
         (var B1, var T1) = TargetLocator.GetTargetCoordinates(
-                            temp_OO1_1.x, temp_OO1_1.y, OO1_H,
-                            temp_OO2_1.x, temp_OO2_1.y, OO2_H,
+                            temp_OO1_1.y, temp_OO1_1.x, OO1_H,
+                            temp_OO2_1.y, temp_OO2_1.x, OO2_H,
                             L1, L2, L3, a, b, aa, bb, cc);
 
-        var gB1 = TranslationWGS84.ConvertFromGaussKrueger(B1.X, B1.Y);
-        var gT1 = TranslationWGS84.ConvertFromGaussKrueger(T1.X, T1.Y);
+        var gB1 = TranslationWGS84.ConvertFromGaussKrueger(B1.Y, B1.X);
+        var gT1 = TranslationWGS84.ConvertFromGaussKrueger(T1.Y, T1.X);
 
         Console.WriteLine($"B = {(gB1.B / Math.PI * 180):f7}, {(gB1.L / Math.PI * 180):f7}, {B1.Z:f2}");
         Console.WriteLine($"T = {(gT1.B / Math.PI * 180):f7}, {(gT1.L / Math.PI * 180):f7}, {T1.Z:f2}");
@@ -109,20 +111,14 @@ class Program
             (OO2_B, OO2_L, OO2_H),
             (OO1_B, OO1_L, OO1_H));
 
-        /*
-         * 
-         * ЗАМЕЧАНИЕ
-         * Метод GetTargetCoordinates работает при условии что x - направление на Север, y - Направление на Восток
-         * 
-         */
 
         (var B2, var T2) = TargetLocator.GetTargetCoordinates(
-                            temp_OO1_2.north, temp_OO1_2.east, temp_OO1_2.up,
-                            temp_OO2_2.north, temp_OO2_2.east, temp_OO2_2.up,
+                            temp_OO1_2.east, temp_OO1_2.north, temp_OO1_2.up,
+                            temp_OO2_2.east, temp_OO2_2.north, temp_OO2_2.up,
                             L1, L2, L3, a, b, aa, bb, cc);
 
-        var gB2 = TranslationWGS84.ConvertLocalTangentToGeodetic((B2.Y, B2.X, B2.Z), (OO1_B, OO1_L, OO1_H));
-        var gT2 = TranslationWGS84.ConvertLocalTangentToGeodetic((T2.Y, T2.X, T2.Z), (OO1_B, OO1_L, OO1_H));
+        var gB2 = TranslationWGS84.ConvertLocalTangentToGeodetic((B2.X, B2.Y, B2.Z), (OO1_B, OO1_L, OO1_H));
+        var gT2 = TranslationWGS84.ConvertLocalTangentToGeodetic((T2.X, T2.Y, T2.Z), (OO1_B, OO1_L, OO1_H));
 
         Console.WriteLine($"B = {(gB2.B / Math.PI * 180):f7}, {(gB2.L / Math.PI * 180):f7}, {gB2.H:f2}");
         Console.WriteLine($"T = {(gT2.B / Math.PI * 180):f7}, {(gT2.L / Math.PI * 180):f7}, {gT2.H:f2}");
