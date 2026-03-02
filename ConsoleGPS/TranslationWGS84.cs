@@ -338,7 +338,157 @@ namespace ConsoleGPS
         // Local tangent plane coordinates - https://archive.psas.pdx.edu/CoordinateSystem/Latitude_to_LocalTangent.pdf
 
         #region Координаты локальной касательной плоскости
+
+        /// <summary>
+        /// Преобразует геодезические координаты WGS-84 в локальные плоские координаты (восток, север, вверх) относительно опорной точки
+        /// </summary>
+        /// <param name="targetLatitude">Широта целевой точки в радианах</param>
+        /// <param name="targetLongitude">Долгота целевой точки в радианах</param>
+        /// <param name="targetAltitude">Высота целевой точки в метрах</param>
+        /// <param name="originLatitude">Широта опорной точки (начала координат) в радианах</param>
+        /// <param name="originLongitude">Долгота опорной точки (начала координат) в радианах</param>
+        /// <param name="originAltitude">Высота опорной точки (начала координат) в метрах</param>
+        /// <returns>Кортеж (east, north, up) - локальные плоские координаты в метрах</returns>
+        public static (double east, double north, double up) ConvertGeodeticToLocalTangent(
+            double targetLatitude, double targetLongitude, double targetAltitude,
+            double originLatitude, double originLongitude, double originAltitude)
+        {
+            // Преобразуем целевую точку в ECEF-прямоугольные координаты
+            var targetCart = ConvertGeodeticToCartesian(targetLatitude, targetLongitude, EncodingDatum.WGS_84, targetAltitude);
+
+            // Преобразуем опорную точку в ECEF-прямоугольные координаты
+            var originCart = ConvertGeodeticToCartesian(originLatitude, originLongitude, EncodingDatum.WGS_84, originAltitude);
+
+            // Вычисляем разность координат (перевод начала координат в опорную точку)
+            double dx = targetCart.X - originCart.X;
+            double dy = targetCart.Y - originCart.Y;
+            double dz = targetCart.Z - originCart.Z;
+
+            // Вычисляем матрицу вращения для перехода к локальной касательной плоскости
+            double sinLat = Math.Sin(originLatitude);
+            double cosLat = Math.Cos(originLatitude);
+            double sinLon = Math.Sin(originLongitude);
+            double cosLon = Math.Cos(originLongitude);
+
+            // Матрица преобразования из ECEF в локальные координаты (восток, север, вверх)
+            // Согласно формуле: [east; north; up] = R * [dx; dy; dz]
+            double east = -sinLon * dx + cosLon * dy;
+            double north = -sinLat * cosLon * dx - sinLat * sinLon * dy + cosLat * dz;
+            double up = cosLat * cosLon * dx + cosLat * sinLon * dy + sinLat * dz;
+
+            return (east, north, up);
+        }
+
+        /// <summary>
+        /// Преобразует локальные плоские координаты (восток, север, вверх) обратно в геодезические координаты WGS-84
+        /// </summary>
+        /// <param name="east">Восточное смещение в метрах</param>
+        /// <param name="north">Северное смещение в метрах</param>
+        /// <param name="up">Вертикальное смещение в метрах</param>
+        /// <param name="originLatitude">Широта опорной точки (начала координат) в радианах</param>
+        /// <param name="originLongitude">Долгота опорной точки (начала координат) в радианах</param>
+        /// <param name="originAltitude">Высота опорной точки (начала координат) в метрах</param>
+        /// <returns>Кортеж (B, L, H) - широта (рад), долгота (рад), высота (м) в системе WGS-84</returns>
+        public static (double B, double L, double H) ConvertLocalTangentToGeodetic(
+            double east, double north, double up,
+            double originLatitude, double originLongitude, double originAltitude)
+        {
+            // Преобразуем опорную точку в ECEF-прямоугольные координаты
+            var originCart = ConvertGeodeticToCartesian(originLatitude, originLongitude, EncodingDatum.WGS_84, originAltitude);
+
+            // Вычисляем матрицу обратного преобразования (транспонированная матрица прямого преобразования)
+            double sinLat = Math.Sin(originLatitude);
+            double cosLat = Math.Cos(originLatitude);
+            double sinLon = Math.Sin(originLongitude);
+            double cosLon = Math.Cos(originLongitude);
+
+            // Обратное преобразование из локальных координат в ECEF (согласно формуле: [dx; dy; dz] = R^T * [east; north; up])
+            double dx = -sinLon * east - sinLat * cosLon * north + cosLat * cosLon * up;
+            double dy = cosLon * east - sinLat * sinLon * north + cosLat * sinLon * up;
+            double dz = cosLat * north + sinLat * up;
+
+            // Добавляем координаты опорной точки
+            double x = dx + originCart.X;
+            double y = dy + originCart.Y;
+            double z = dz + originCart.Z;
+
+            // Преобразуем обратно в геодезические координаты WGS-84
+            return ConvertCartesianToGeodetic(x, y, z, EncodingDatum.WGS_84);
+        }
+
+        /// <summary>
+        /// Преобразует геодезические координаты WGS-84 в локальные плоские координаты (восток, север, вверх) относительно опорной точки
+        /// </summary>
+        /// <param name="target">Кортеж (B, L, H) целевой точки - широта (рад), долгота (рад), высота (м)</param>
+        /// <param name="origin">Кортеж (B, L, H) опорной точки - широта (рад), долгота (рад), высота (м)</param>
+        /// <returns>Кортеж (east, north, up) - локальные плоские координаты в метрах</returns>
+        public static (double east, double north, double up) ConvertGeodeticToLocalTangent(
+            (double B, double L, double H) target,
+            (double B, double L, double H) origin)
+        {
+            return ConvertGeodeticToLocalTangent(
+                target.B, target.L, target.H,
+                origin.B, origin.L, origin.H);
+        }
+
+        /// <summary>
+        /// Преобразует локальные плоские координаты (восток, север, вверх) обратно в геодезические координаты WGS-84
+        /// </summary>
+        /// <param name="local">Кортеж (east, north, up) локальные координаты в метрах</param>
+        /// <param name="origin">Кортеж (B, L, H) опорной точки - широта (рад), долгота (рад), высота (м)</param>
+        /// <returns>Кортеж (B, L, H) - широта (рад), долгота (рад), высота (м) в системе WGS-84</returns>
+        public static (double B, double L, double H) ConvertLocalTangentToGeodetic(
+            (double east, double north, double up) local,
+            (double B, double L, double H) origin)
+        {
+            return ConvertLocalTangentToGeodetic(
+                local.east, local.north, local.up,
+                origin.B, origin.L, origin.H);
+        }
+
         #endregion
+
+        #region Методы используемые для тестов
+
+        /// <summary>
+        /// Вычисляет расстояние между двумя точками в локальной касательной плоскости
+        /// </summary>
+        /// <param name="point1">Координаты первой точки (B, L, H) в радианах и метрах</param>
+        /// <param name="point2">Координаты второй точки (B, L, H) в радианах и метрах</param>
+        /// <returns>Расстояние в метрах</returns>
+        public static double CalculateDistanceInLocalTangent(
+            (double B, double L, double H) point1,
+            (double B, double L, double H) point2)
+        {
+            // Используем первую точку как начало координат
+            var local = ConvertGeodeticToLocalTangent(point2, point1);
+
+            // Вычисляем евклидово расстояние в локальной плоскости (игнорируем вертикальную компоненту для горизонтального расстояния)
+            return Math.Sqrt(local.east * local.east + local.north * local.north);
+        }
+
+        /// <summary>
+        /// Вычисляет азимут (угол от севера) от первой точки ко второй в локальной касательной плоскости
+        /// </summary>
+        /// <param name="from">Исходная точка (B, L, H) в радианах и метрах</param>
+        /// <param name="to">Целевая точка (B, L, H) в радианах и метрах</param>
+        /// <returns>Азимут в радианах от 0 до 2π (0 = север, π/2 = восток)</returns>
+        public static double CalculateAzimuthInLocalTangent(
+            (double B, double L, double H) from,
+            (double B, double L, double H) to)
+        {
+            var local = ConvertGeodeticToLocalTangent(to, from);
+
+            // Азимут измеряется от севера по часовой стрелке
+            double azimuth = Math.Atan2(local.east, local.north);
+            if (azimuth < 0)
+                azimuth += 2 * Math.PI;
+
+            return azimuth;
+        }
+
+        #endregion
+
 
     }
 }
