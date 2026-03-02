@@ -12,6 +12,8 @@ namespace ConsoleGPS
 
     internal static class TranslationWGS84
     {
+        // ГОСТ 32453-2017 - https://racurs.ru/downloads/documentation/gost_r_32453-2017.pdf?ysclid=m74cniwn8633815025
+
         #region Параметры эллипсоидов
         /// <summary>
         /// Возвращает параметры референц-эллипсоида для заданной системы координат
@@ -332,5 +334,11 @@ namespace ConsoleGPS
             return wgsGeo; // (B, L, H) - широта (рад), долгота (рад), высота (м)
         }
         #endregion
+
+        // Local tangent plane coordinates - https://archive.psas.pdx.edu/CoordinateSystem/Latitude_to_LocalTangent.pdf
+
+        #region Координаты локальной касательной плоскости
+        #endregion
+
     }
 }
