@@ -69,21 +69,21 @@ class Program
     {
         Console.WriteLine("Тест 4");
         // Начальные значения
-        double OO1_B = 53.2015043 / 180 * Math.PI;
-        double OO1_L = 50.1133423 / 180 * Math.PI;
-        double OO1_H = -10;
-        double OO2_B = 53.2000976 / 180 * Math.PI;
-        double OO2_L = 50.1125830 / 180 * Math.PI;
-        double OO2_H = 13;
-        double L1 = 210.01;
-        double L2 = 247.08;
-        double L3 = 246.46;
+        double OO1_B = 53.1993291 / 180 * Math.PI;
+        double OO1_L = 50.1223050 / 180 * Math.PI;
+        double OO1_H = 84.13;
+        double OO2_B = 53.1885296 / 180 * Math.PI;
+        double OO2_L = 50.1099204 / 180 * Math.PI;
+        double OO2_H = 64.82;
+        double L1 = 1162.54;
+        double L2 = 930.5;
+        double L3 = 1423.16;
 
-        double a = -18.32;
-        double b = 41.07;
-        double aa = -58.99;
-        double bb = -39.45;
-        double cc = -37.48;
+        double a = 72.156;
+        double b = -20.31;
+        double aa = -14.312;
+        double bb = -19.246;
+        double cc = -12.03;
 
 
         // Проверка на проекции Гаусса-Крюгера
