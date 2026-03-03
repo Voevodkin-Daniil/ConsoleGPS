@@ -105,6 +105,8 @@ private static bool test_3((double B, double L, double H) T, (double B, double L
 
 ```
 
+---
+
 ## Реализация преобразований геодезических координат (TranslationWGS84)
 
 ### Общее описание
