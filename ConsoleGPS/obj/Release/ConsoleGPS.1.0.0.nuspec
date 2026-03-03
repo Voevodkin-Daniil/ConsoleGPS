@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>ConsoleGPS</id>
+    <version>1.0.0</version>
+    <authors>ConsoleGPS</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="97166d1d79733537770a2892060674d20618dfc9" />
+    <dependencies>
+      <group targetFramework="net8.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\bin\Release\net8.0\ConsoleGPS.runtimeconfig.json" target="lib\net8.0\ConsoleGPS.runtimeconfig.json" />
+    <file src="C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\bin\Release\net8.0\ConsoleGPS.dll" target="lib\net8.0\ConsoleGPS.dll" />
+  </files>
+</package>

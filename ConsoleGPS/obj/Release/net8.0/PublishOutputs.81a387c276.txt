@@ -1,0 +1,5 @@
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\bin\Release\net8.0\publish\ConsoleGPS.exe
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\bin\Release\net8.0\publish\ConsoleGPS.dll
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\bin\Release\net8.0\publish\ConsoleGPS.deps.json
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\bin\Release\net8.0\publish\ConsoleGPS.runtimeconfig.json
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\bin\Release\net8.0\publish\ConsoleGPS.pdb

@@ -2,7 +2,7 @@
 
 using ConsoleGPS;
 
-class Program
+internal class Program
 {
     static void Main()
     {

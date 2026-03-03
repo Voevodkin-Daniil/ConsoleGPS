@@ -1,0 +1,15 @@
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\bin\Release\net8.0\ConsoleGPS.exe
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\bin\Release\net8.0\ConsoleGPS.deps.json
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\bin\Release\net8.0\ConsoleGPS.runtimeconfig.json
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\bin\Release\net8.0\ConsoleGPS.dll
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\bin\Release\net8.0\ConsoleGPS.pdb
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\obj\Release\net8.0\ConsoleGPS.GeneratedMSBuildEditorConfig.editorconfig
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\obj\Release\net8.0\ConsoleGPS.AssemblyInfoInputs.cache
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\obj\Release\net8.0\ConsoleGPS.AssemblyInfo.cs
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\obj\Release\net8.0\ConsoleGPS.csproj.CoreCompileInputs.cache
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\obj\Release\net8.0\ConsoleGPS.sourcelink.json
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\obj\Release\net8.0\ConsoleGPS.dll
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\obj\Release\net8.0\refint\ConsoleGPS.dll
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\obj\Release\net8.0\ConsoleGPS.pdb
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\obj\Release\net8.0\ConsoleGPS.genruntimeconfig.cache
+C:\MyDirrectory\Работа\Папка с связаным с переводом из WGS84\Консольная часть\ConsoleGPS\ConsoleGPS\obj\Release\net8.0\ref\ConsoleGPS.dll

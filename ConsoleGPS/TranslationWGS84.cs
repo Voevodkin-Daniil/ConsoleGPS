@@ -10,7 +10,7 @@ namespace ConsoleGPS
         SK           // СК-42 / СК-95 (эллипсоид Красовского)
     }
 
-    internal static class TranslationWGS84
+    public static class TranslationWGS84
     {
         // ГОСТ 32453-2017 - https://racurs.ru/downloads/documentation/gost_r_32453-2017.pdf?ysclid=m74cniwn8633815025
 

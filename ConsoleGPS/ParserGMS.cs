@@ -3,7 +3,7 @@
 
 namespace ConsoleGPS
 {
-    internal class ParserGMS
+    public class ParserGMS
     {
         /// <summary>
         /// Парсит строку в формате "градусы минуты секунды" в десятичные градусы
@@ -57,7 +57,7 @@ namespace ConsoleGPS
     /// <summary>
     /// Предоставляет методы для триангуляции координат Наблюдателя и цели на основе данных с двух наблюдательных пунктов.
     /// </summary>
-    public static class TargetLocator
+    internal static class TargetLocator
     {
         /// <summary>
         /// Вычисляет положительный остаток от деления (математический модуль).
